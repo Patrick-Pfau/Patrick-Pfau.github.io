@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>{{ site.title }}</title>
+  <meta name="description" content="{{ site.description }}">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: sans-serif;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.light-mode {
+      background: white;
+      color: black;
+    }
+
+    body.dark-mode {
+      background: #121212;
+      color: white;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 1rem;
+      right: 1rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      border: none;
+      border-radius: 4px;
+      background: #ccc;
+    }
+  </style>
+</head>
+<body class="light-mode">
+  <button class="theme-toggle" onclick="toggleTheme()">🌓 Theme</button>
+
+  {{ content }}
+
+  <script>
+    // Optional: Save user's choice in localStorage
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme) {
+      document.body.className = savedTheme;
+    }
+
+    function toggleTheme() {
+      const current = document.body.className;
+      const next = current === 'light-mode' ? 'dark-mode' : 'light-mode';
+      document.body.className = next;
+      localStorage.setItem('theme', next);
+    }
+  </script>
+</body>
+</html>
